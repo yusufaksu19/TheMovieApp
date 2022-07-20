@@ -10,6 +10,6 @@ class SearchMoviesPage extends StatefulWidget {
 class _SearchMoviesPageState extends State<SearchMoviesPage> {
   @override
   Widget build(BuildContext context) {
-    return Text('alsdkjlf');
+    return Text('asdfasdfasdfasdfdsa');
   }
 }
