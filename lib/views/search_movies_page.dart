@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lazy_load_scrollview/lazy_load_scrollview.dart' as lazy;
 import 'package:provider/provider.dart';
+import 'package:the_movie_app/models/movie_model.dart';
+import 'package:the_movie_app/services/api_services.dart';
 import 'package:the_movie_app/view_models/movie_search_view_model.dart';
 
 import 'package:the_movie_app/widgets/movie_card.dart';
@@ -44,6 +47,7 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
                   if (value.length > 2) {
                     searchMovies(value, 1);
                   }
+                  movieSearchViewModel.nextPage = 1;
                 },
                 controller: _searchMovieController,
                 style: const TextStyle(
@@ -67,14 +71,29 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
             else
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.83,
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 150,
-                    childAspectRatio: 3 / 4,
-                  ),
-                  itemCount: movieSearchViewModel.moviesPage.results.length,
-                  itemBuilder: (context, index) => MovieCard(
-                    index: index,
+                child: lazy.LazyLoadScrollView(
+                  onEndOfPage: () async {
+                    if (movieSearchViewModel.moviesPage.page <= movieSearchViewModel.moviesPage.totalPages) {
+                      movieSearchViewModel.nextPage++;
+                      MovieModel newMovies;
+
+                      newMovies = await ApiServices().searchMovies(_searchMovieController.text, movieSearchViewModel.nextPage);
+
+                      setState(() {
+                        print('geldi');
+                        movieSearchViewModel.moviesPage.results.addAll(newMovies.results);
+                      });
+                    }
+                  },
+                  child: GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 150,
+                      childAspectRatio: 3 / 4,
+                    ),
+                    itemCount: movieSearchViewModel.moviesPage.results.length,
+                    itemBuilder: (context, index) => MovieCard(
+                      index: index,
+                    ),
                   ),
                 ),
               ),

@@ -11,7 +11,7 @@ class MovieModel {
   });
 
   final int page;
-  final List<Result> results;
+  List<Result> results;
   final int totalPages;
   final int totalResults;
 
@@ -41,11 +41,10 @@ class Result {
   final dynamic voteAverage;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
-        id: json["id"] ?? 0,
-        backdropPath: json["backdrop_path"] ?? "https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg",
-        originalTitle: json["original_title"] ?? "",
-        posterPath: json["poster_path"] ?? "https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg",
-        title: json["title"] ?? "",
-        voteAverage: json["vote_average"] ?? 0
-      );
+      id: json["id"] ?? 0,
+      backdropPath: json["backdrop_path"] ?? "https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg",
+      originalTitle: json["original_title"] ?? "",
+      posterPath: json["poster_path"] ?? "https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg",
+      title: json["title"] ?? "",
+      voteAverage: json["vote_average"] ?? 0);
 }
