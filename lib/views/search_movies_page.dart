@@ -27,7 +27,7 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
 
     return SafeArea(
       child: Scaffold(
-        body: Column(
+        body: ListView(
           children: [
             // Movie Search Bar
             Container(
