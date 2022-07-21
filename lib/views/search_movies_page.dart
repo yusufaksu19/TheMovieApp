@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_movie_app/widgets/MovieCard.dart';
+import 'package:the_movie_app/widgets/movie_card.dart';
 
 class SearchMoviesPage extends StatefulWidget {
   const SearchMoviesPage({Key? key}) : super(key: key);

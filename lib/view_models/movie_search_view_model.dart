@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_movie_app/enums/enums.dart';
-import 'package:the_movie_app/models/MovieModel.dart';
+import 'package:the_movie_app/models/movie_model.dart';
 import 'package:the_movie_app/services/api_services.dart';
 
 class MovieSearchViewModel with ChangeNotifier {
