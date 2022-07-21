@@ -41,7 +41,7 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
               ),
               child: TextFormField(
                 onChanged: (value) {
-                  if (value.length > 1) {
+                  if (value.length > 2) {
                     searchMovies(value, 1);
                   }
                 },
