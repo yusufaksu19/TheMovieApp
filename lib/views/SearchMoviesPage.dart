@@ -15,6 +15,7 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
       child: Scaffold(
           body: Column(
         children: [
+          // Movie Search Bar
           Container(
             margin: const EdgeInsets.all(6),
             height: MediaQuery.of(context).size.height * 0.06,
@@ -35,8 +36,9 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
               ),
             ),
           ),
+          // Movies
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.8,
+            height: MediaQuery.of(context).size.height * 0.83,
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 150,
