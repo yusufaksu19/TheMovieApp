@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:the_movie_app/view_models/movie_search_view_model.dart';
 
 class MovieCard extends StatelessWidget {
-  const MovieCard({Key? key}) : super(key: key);
+  final int index;
+  const MovieCard({
+    Key? key,
+    required this.index,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    MovieSearchViewModel movieSearchViewModel = Provider.of<MovieSearchViewModel>(context);
+
+    String movieTitle = movieSearchViewModel.moviesPage.results[index].originalTitle;
+    String voteAverage = movieSearchViewModel.moviesPage.results[index].voteAverage.toString();
+    String posterImage = movieSearchViewModel.moviesPage.results[index].posterPath;
+
+    String posterUrl = "https://www.themoviedb.org/t/p/w1280";
+
     return Container(
       margin: const EdgeInsets.all(6),
       child: Column(
@@ -23,7 +37,7 @@ class MovieCard extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
-                child: Image.network('https://productimages.hepsiburada.net/s/6/1500/9706412834866.jpg'),
+                child: Image.network('$posterUrl$posterImage'),
               ),
               // Movie point
               Container(
@@ -40,7 +54,9 @@ class MovieCard extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
-                child: const Center(child: Text('10')),
+                child: Center(
+                  child: Text(voteAverage),
+                ),
               ),
             ],
           ),
@@ -55,9 +71,9 @@ class MovieCard extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            child: const Padding(
-              padding:  EdgeInsets.only(left: 3, top: 3),
-              child: Text('Spiderman'),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 3, top: 3),
+              child: Text(movieTitle),
             ),
           ),
         ],

@@ -1,12 +1,14 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:the_movie_app/models/movie_model.dart';
+
 class ApiServices {
   String apiKey = "35ef0461fc4557cf1d256d3335ed7545";
   String url = "https://api.themoviedb.org/3";
 
   // Search for movies
-  Future searchMovies(String movieTitle, int pageNumber) async {
+  Future<MovieModel> searchMovies(String movieTitle, int pageNumber) async {
     var response = await http.get(
       Uri.parse('$url/search/movie?api_key=$apiKey&query=$movieTitle&language=en-US&page=$pageNumber&include_adult=false'),
       headers: {'Content-Type': 'application/json'},
@@ -15,7 +17,7 @@ class ApiServices {
     print('searchMovies status code = ${response.statusCode}');
     print('searchMovies status code = ${response.body}');
 
-    return returnResponse(response);
+    return MovieModel.fromJson(returnResponse(response));
   }
 
   // Request feedbacks

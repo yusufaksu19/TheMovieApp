@@ -18,12 +18,12 @@ class MovieSearchViewModel with ChangeNotifier {
   LoadingStatus get loadingStatus => _loadingStatus;
 
   Future<void> searchMovies(String movieTitle, int pageNumber) async {
+    loadingStatus = LoadingStatus.loading;
     try {
-      _loadingStatus = LoadingStatus.loading;
-
       _moviesPage = await ApiServices().searchMovies(movieTitle, pageNumber);
 
       loadingStatus = LoadingStatus.completed;
+
     } catch (e) {
       print('catch $e');
 

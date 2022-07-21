@@ -30,6 +30,7 @@ class Result {
     required this.originalTitle,
     required this.posterPath,
     required this.title,
+    required this.voteAverage,
   });
 
   final String backdropPath;
@@ -37,6 +38,7 @@ class Result {
   final String originalTitle;
   final String posterPath;
   final String title;
+  final dynamic voteAverage;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"] ?? 0,
@@ -44,5 +46,6 @@ class Result {
         originalTitle: json["original_title"] ?? "",
         posterPath: json["poster_path"] ?? "https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg",
         title: json["title"] ?? "",
+        voteAverage: json["vote_average"] ?? 0
       );
 }
