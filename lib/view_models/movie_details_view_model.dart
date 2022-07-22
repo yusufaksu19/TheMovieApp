@@ -6,7 +6,16 @@ import 'package:the_movie_app/services/api_services.dart';
 class MovieDetailsViewModel with ChangeNotifier {
   LoadingStatus _loadingStatus = LoadingStatus.initial;
 
-  late MovieDetailsModel _movieDetails;
+  late MovieDetailsModel _movieDetails = MovieDetailsModel(
+    backdropPath: '',
+    genres: [],
+    id: 0,
+    originalTitle: '',
+    overview: '',
+    posterPath: '',
+    title: '',
+    voteAverage: null,
+  );
 
   MovieDetailsModel get movieDetails => _movieDetails;
 

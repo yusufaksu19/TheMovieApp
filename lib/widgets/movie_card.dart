@@ -17,6 +17,7 @@ class MovieCard extends StatelessWidget {
     String movieTitle = movieSearchViewModel.moviesPage.results[index].originalTitle;
     String voteAverage = movieSearchViewModel.moviesPage.results[index].voteAverage.toString();
     String posterImage = movieSearchViewModel.moviesPage.results[index].posterPath;
+    int movieId = movieSearchViewModel.moviesPage.results[index].id;
 
     String getPosterImage() {
       String posterUrl = "https://www.themoviedb.org/t/p/w1280";
@@ -31,7 +32,15 @@ class MovieCard extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (_) => const MovieDetailsPage()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MovieDetailsPage(
+                      movieId: movieId,
+                      movieImage: getPosterImage(),
+                      movieTitle: movieTitle,
+                      voteAverage: voteAverage,
+                    )));
       },
       child: Container(
         margin: const EdgeInsets.all(6),

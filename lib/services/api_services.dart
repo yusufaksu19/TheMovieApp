@@ -1,7 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:the_movie_app/models/movie_details_model.dart';
 import 'dart:convert';
-
 import 'package:the_movie_app/models/movie_model.dart';
 
 class ApiServices {
@@ -15,9 +14,6 @@ class ApiServices {
       headers: {'Content-Type': 'application/json'},
     );
 
-    print('searchMovies status code = ${response.statusCode}');
-    print('searchMovies status code = ${response.body}');
-
     return MovieModel.fromJson(returnResponse(response));
   }
 
@@ -26,9 +22,6 @@ class ApiServices {
       Uri.parse('$url/movie/$movieId?api_key=$apiKey&&language=en-US'),
       headers: {'Content-Type': 'application/json'},
     );
-
-    print('getMovieDetails status code = ${response.statusCode}');
-    print('getMovieDetails status code = ${response.body}');
 
     return MovieDetailsModel.fromJson(returnResponse(response));
   }
