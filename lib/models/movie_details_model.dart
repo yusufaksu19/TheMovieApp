@@ -21,17 +21,17 @@ class MovieDetailsModel {
   final String backdropPath;
   final String posterPath;
   final String title;
-  final double voteAverage;
+  final dynamic voteAverage;
 
   factory MovieDetailsModel.fromJson(Map<String, dynamic> json) => MovieDetailsModel(
-        id: json["id"],
-        backdropPath: json["backdrop_path"],
-        overview: json["overview"],
+        id: json["id"] ?? 0,
+        backdropPath: json["backdrop_path"] ?? 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg',
+        overview: json["overview"] ?? '',
         genres: List<Genre>.from(json["genres"].map((x) => Genre.fromJson(x))),
-        originalTitle: json["original_title"],
-        posterPath: json["poster_path"],
-        voteAverage: json["vote_average"].toDouble(),
-        title: json["title"],
+        originalTitle: json["original_title"] ?? '',
+        posterPath: json["poster_path"] ?? 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg',
+        voteAverage: json["vote_average"] ?? 0,
+        title: json["title"] ?? '',
       );
 }
 
@@ -45,7 +45,7 @@ class Genre {
   final String name;
 
   factory Genre.fromJson(Map<String, dynamic> json) => Genre(
-        id: json["id"],
-        name: json["name"],
+        id: json["id"] ?? 0,
+        name: json["name"] ?? '',
       );
 }
