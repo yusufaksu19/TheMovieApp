@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:the_movie_app/view_models/movie_details_view_model.dart';
 import 'package:the_movie_app/view_models/movie_search_view_model.dart';
 import 'package:the_movie_app/views/search_movies_page.dart';
 
@@ -18,13 +19,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => MovieSearchViewModel(),
         ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+        ChangeNotifierProvider(
+          create: (_) => MovieDetailsViewModel(),
         ),
+      ],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: SearchMoviesPage(),
       ),
     );
