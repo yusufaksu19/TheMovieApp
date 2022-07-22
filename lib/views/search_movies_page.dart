@@ -17,7 +17,7 @@ class SearchMoviesPage extends StatefulWidget {
 }
 
 class _SearchMoviesPageState extends State<SearchMoviesPage> {
-  TextEditingController _searchMovieController = TextEditingController();
+  final TextEditingController _searchMovieController = TextEditingController();
 
   void searchMovies(String movieTitle, int pageNumber) async {
     MovieSearchViewModel movieSearchViewModel = Provider.of<MovieSearchViewModel>(context, listen: false);
@@ -80,7 +80,6 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
                       newMovies = await ApiServices().searchMovies(_searchMovieController.text, movieSearchViewModel.nextPage);
 
                       setState(() {
-                        print('geldi');
                         movieSearchViewModel.moviesPage.results.addAll(newMovies.results);
                       });
                     }
