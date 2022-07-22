@@ -58,98 +58,100 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
           backgroundColor: Colors.black,
           title: Text(widget.movieTitle),
         ),
-        body: movieDetailsViewModel.loadingStatus == LoadingStatus.loading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : Stack(
-                children: [
-                  FractionallySizedBox(
-                    heightFactor: 1.0,
-                    widthFactor: 1.0,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(getBackDropImage()),
-                          fit: BoxFit.fill,
-                        ),
-                      ),
+        body: Stack(
+          children: [
+            if (movieDetailsViewModel.loadingStatus == LoadingStatus.loading)
+              const Center(child: CircularProgressIndicator())
+            else
+              FractionallySizedBox(
+                heightFactor: 1.0,
+                widthFactor: 1.0,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(getBackDropImage()),
+                      fit: BoxFit.fill,
                     ),
                   ),
-                  Column(
+                ),
+              ),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
+                      Stack(
+                        alignment: Alignment.bottomLeft,
+                        children: [
+                          // Movie Picture
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.25,
+                            width: MediaQuery.of(context).size.width * 0.40,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: const BorderRadius.vertical(),
+                              border: Border.all(
+                                color: Colors.black,
+                              ),
+                            ),
+                            child: Image.network(
+                              widget.movieImage,
+                            ),
+                          ),
+                          // Movie point
+                          Container(
+                            margin: const EdgeInsets.only(
+                              left: 5,
+                              bottom: 5,
+                            ),
+                            height: MediaQuery.of(context).size.height * 0.03,
+                            width: MediaQuery.of(context).size.width * 0.06,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: const BorderRadius.vertical(),
+                              border: Border.all(
+                                color: Colors.black,
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(widget.voteAverage),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      if (movieDetailsViewModel.loadingStatus == LoadingStatus.loading)
+                        const Center(child: CircularProgressIndicator())
+                      else
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Stack(
-                              alignment: Alignment.bottomLeft,
-                              children: [
-                                // Movie Picture
-                                Container(
-                                  height: MediaQuery.of(context).size.height * 0.25,
-                                  width: MediaQuery.of(context).size.width * 0.40,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: const BorderRadius.vertical(),
-                                    border: Border.all(
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  child: Image.network(
-                                    widget.movieImage,
-                                  ),
-                                ),
-                                // Movie point
-                                Container(
-                                  margin: const EdgeInsets.only(
-                                    left: 5,
-                                    bottom: 5,
-                                  ),
-                                  height: MediaQuery.of(context).size.height * 0.03,
-                                  width: MediaQuery.of(context).size.width * 0.06,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: const BorderRadius.vertical(),
-                                    border: Border.all(
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: Text(widget.voteAverage),
-                                  ),
-                                ),
-                              ],
+                            SizedBox(
+                              child: Text(overview),
+                              height: 100,
+                              width: 200,
                             ),
                             const SizedBox(
-                              width: 15,
+                              height: 20,
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  child: Text(overview),
-                                  height: 100,
-                                  width: 200,
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                SizedBox(
-                                  child: Text(allGenres),
-                                  height: 100,
-                                  width: 200,
-                                ),
-                              ],
-                            )
+                            SizedBox(
+                              child: Text(allGenres),
+                              height: 100,
+                              width: 200,
+                            ),
                           ],
-                        ),
-                      )
+                        )
                     ],
                   ),
-                ],
-              ),
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
