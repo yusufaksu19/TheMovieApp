@@ -18,7 +18,16 @@ class MovieCard extends StatelessWidget {
     String voteAverage = movieSearchViewModel.moviesPage.results[index].voteAverage.toString();
     String posterImage = movieSearchViewModel.moviesPage.results[index].posterPath;
 
-    String posterUrl = "https://www.themoviedb.org/t/p/w1280";
+    String getPosterImage() {
+      String posterUrl = "https://www.themoviedb.org/t/p/w1280";
+      String noImageUrl = "https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg";
+
+      if (posterImage != "") {
+        return "$posterUrl$posterImage";
+      } else {
+        return noImageUrl;
+      }
+    }
 
     return InkWell(
       onTap: () {
@@ -42,7 +51,7 @@ class MovieCard extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  child: Image.network('$posterUrl$posterImage'),
+                  child: Image.network(getPosterImage()),
                 ),
                 // Movie point
                 Container(
